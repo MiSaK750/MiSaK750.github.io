@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MiSaK750</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#03050a; --text:#e6f4ff; --muted:#8aa4bf;
+  --blue:#00d4ff; --blue2:#1a6bff; --pink:#ff2bd6;
+  --glass:rgba(10,22,42,.45); --glass-b:rgba(0,212,255,.22);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#03050a;--text:#e6f4ff}}
+:root[data-theme="dark"]{--bg:#03050a;--text:#e6f4ff}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.6;overflow-x:hidden;min-height:100vh}
+.circuit{position:fixed;inset:0;width:100%;height:100%;z-index:-2;pointer-events:none;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 40%,rgba(0,0,0,.55) 0%,#000 85%);mask-image:radial-gradient(ellipse at 50% 40%,rgba(0,0,0,.55) 0%,#000 85%)}
+.pulse{fill:none;stroke-width:2.2;stroke-linecap:round;stroke-dasharray:6 94;animation:flow 8s linear infinite;filter:drop-shadow(0 0 5px currentColor)}
+.pulse.b{stroke:var(--blue);color:var(--blue)}.pulse.p{stroke:var(--pink);color:var(--pink)}
+@keyframes flow{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(rgba(0,212,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.05) 1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%)}
+main{max-width:980px;margin:0 auto;padding:0 22px 80px}
+
+/* HERO */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:22px}
+.glitch{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(3rem,13vw,8.5rem);letter-spacing:.02em;line-height:1;position:relative;color:#fff;
+  text-shadow:0 0 18px rgba(0,212,255,.55),0 0 60px rgba(26,107,255,.5)}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;inset:0;overflow:hidden}
+.glitch::before{color:var(--blue);text-shadow:none;mix-blend-mode:screen;animation:gl1 3.2s infinite steps(1)}
+.glitch::after{color:var(--pink);text-shadow:none;mix-blend-mode:screen;animation:gl2 2.7s infinite steps(1)}
+@keyframes gl1{
+  0%,100%{clip-path:inset(0 0 100% 0);transform:translate(0)}
+  4%{clip-path:inset(10% 0 70% 0);transform:translate(-6px,0)}
+  8%{clip-path:inset(55% 0 20% 0);transform:translate(5px,0)}
+  12%{clip-path:inset(0 0 100% 0)}
+  50%{clip-path:inset(0 0 100% 0)}
+  54%{clip-path:inset(30% 0 45% 0);transform:translate(-8px,0)}
+  58%{clip-path:inset(80% 0 5% 0);transform:translate(4px,0)}
+  62%{clip-path:inset(0 0 100% 0)}
+  85%{clip-path:inset(40% 0 40% 0);transform:translate(-3px,0)}
+  88%{clip-path:inset(0 0 100% 0)}}
+@keyframes gl2{
+  0%,100%{clip-path:inset(0 0 100% 0)}
+  6%{clip-path:inset(60% 0 15% 0);transform:translate(7px,0)}
+  10%{clip-path:inset(5% 0 80% 0);transform:translate(-5px,0)}
+  14%{clip-path:inset(0 0 100% 0)}
+  40%{clip-path:inset(20% 0 60% 0);transform:translate(6px,0)}
+  44%{clip-path:inset(70% 0 10% 0);transform:translate(-7px,0)}
+  48%{clip-path:inset(0 0 100% 0)}
+  76%{clip-path:inset(45% 0 35% 0);transform:translate(4px,0)}
+  80%{clip-path:inset(0 0 100% 0)}}
+.glitch .stripes{position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent 0 6px,rgba(0,212,255,.0) 6px 7px);
+  animation:bars 4s infinite steps(1)}
+.tag{font-family:'Chakra Petch',sans-serif;letter-spacing:.3em;color:var(--blue);font-size:.9rem;text-shadow:0 0 10px var(--blue)}
+.tag span{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 12px var(--pink);margin-right:10px;animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.2}}
+.scroll{margin-top:30px;width:26px;height:44px;border:2px solid var(--glass-b);border-radius:14px;position:relative}
+.scroll::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--blue);box-shadow:0 0 8px var(--blue);animation:wheel 1.6s infinite}
+@keyframes wheel{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(16px)}}
+
+/* GLASS */
+.glass{background:var(--glass);border:1px solid var(--glass-b);border-radius:22px;
+  backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
+  box-shadow:0 0 0 1px rgba(255,255,255,.03) inset,0 10px 50px rgba(0,0,0,.5),0 0 40px rgba(0,212,255,.06);
+  position:relative;transition:border-color .3s,box-shadow .3s,transform .3s}
+.glass:hover{border-color:rgba(0,212,255,.6);box-shadow:0 0 0 1px rgba(255,255,255,.05) inset,0 10px 50px rgba(0,0,0,.5),0 0 36px rgba(0,212,255,.28)}
+section{margin-top:34px}
+h2{font-family:'Chakra Petch',sans-serif;font-size:1.5rem;margin-bottom:16px;display:flex;align-items:center;gap:12px;
+  text-shadow:0 0 14px rgba(0,212,255,.5)}
+h2::before{content:"";width:28px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--blue),var(--pink));box-shadow:0 0 10px var(--blue)}
+
+.about{padding:32px 30px;font-size:1.2rem;max-width:100%}
+.about p{max-width:62ch}
+.about b{color:var(--blue);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.chip{padding:14px 20px;border-radius:14px;font-weight:500;display:flex;align-items:center;gap:10px;cursor:default}
+.chip i{font-style:normal;font-size:1.25rem}
+.chip:hover{transform:translateY(-4px)}
+
+.moto{padding:38px 30px;text-align:center}
+.glass::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1.5px;pointer-events:none;
+  background:conic-gradient(from var(--a,0deg),transparent 0deg,var(--blue) 70deg,var(--pink) 140deg,transparent 210deg,var(--blue2) 290deg,transparent 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  animation:spin 6s linear infinite;opacity:.6;transition:opacity .3s}
+.glass:hover::before,.moto::before{opacity:1}
+@property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes spin{to{--a:360deg}}
+.moto small{color:var(--muted);font-size:.9rem}
+.moto q{display:block;font-family:'Chakra Petch',sans-serif;font-size:clamp(1.3rem,3.6vw,2rem);font-weight:600;margin-top:8px;quotes:"„" "“";
+  text-shadow:0 0 20px rgba(0,212,255,.45)}
+
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.link{padding:22px;text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:6px}
+.link strong{font-family:'Chakra Petch',sans-serif;font-size:1.25rem}
+.link span{color:var(--muted);font-size:.92rem}
+.link::after{content:"";position:absolute;left:20px;right:20px;bottom:0;height:2px;background:var(--c);box-shadow:0 0 14px var(--c);transform:scaleX(0);transition:transform .35s;transform-origin:left}
+.link:hover{transform:translateY(-5px)}
+.link:hover::after{transform:scaleX(1)}
+.yt{--c:#ff2b4a}.tw{--c:#b46bff}.dc{--c:#4d7cff}
+
+.proj{padding:28px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.proj h3{font-family:'Chakra Petch',sans-serif;font-size:1.3rem}
+.proj p{color:var(--muted);max-width:46ch}
+.badge{display:inline-block;font-size:.78rem;padding:3px 10px;border-radius:99px;border:1px solid var(--pink);color:var(--pink);margin-bottom:8px;box-shadow:0 0 12px rgba(255,43,214,.3)}
+.btn{padding:12px 22px;border-radius:12px;text-decoration:none;color:#001018;font-weight:700;
+  background:linear-gradient(90deg,var(--blue),var(--blue2));box-shadow:0 0 24px rgba(0,212,255,.5);transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 0 38px rgba(0,212,255,.85)}
+.btn:focus-visible,.link:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+footer{text-align:center;color:var(--muted);margin-top:60px;font-size:.9rem}
+
+/* intro + reveal */
+.hero>*{animation:in .9s both}
+.hero>.tag{animation-delay:.1s}.hero>.glitch{animation-delay:.3s}.hero>.scroll{animation-delay:.8s}
+@keyframes in{from{opacity:0;transform:translateY(16px);filter:blur(8px)}}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+.rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<svg class="circuit" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <pattern id="cb" width="200" height="200" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="rgba(0,212,255,.2)" stroke-width="1.5">
+        <path d="M0 50H70L100 80V150L130 180H200"/>
+        <path d="M200 20H150L120 50V100"/>
+        <path d="M0 130H40L60 150V200"/>
+        <path d="M100 0V30L140 70H200"/>
+        <path d="M160 200V150L180 130H200"/>
+      </g>
+      <g fill="#03050a" stroke="rgba(0,212,255,.45)" stroke-width="1.5">
+        <circle cx="100" cy="80" r="4"/><circle cx="130" cy="180" r="3"/><circle cx="120" cy="100" r="4"/><circle cx="60" cy="150" r="3"/><circle cx="140" cy="70" r="3"/>
+        <rect x="-4" y="46" width="8" height="8"/><rect x="196" y="16" width="8" height="8"/><rect x="96" y="-4" width="8" height="8"/>
+      </g>
+    </pattern>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#cb)"/>
+  <path class="pulse b" pathLength="100" d="M0 250H300L360 310V600L420 660H900"/>
+  <path class="pulse p" pathLength="100" style="animation-delay:-2s;animation-duration:10s" d="M1600 150H1250L1180 220V500L1120 560H700"/>
+  <path class="pulse b" pathLength="100" style="animation-delay:-5s;animation-duration:9s" d="M200 1000V820L260 760H700L760 700H1100"/>
+  <path class="pulse p" pathLength="100" style="animation-delay:-3s;animation-duration:7s" d="M1600 800H1400L1340 740V520"/>
+  <path class="pulse b" pathLength="100" style="animation-delay:-6s;animation-duration:11s" d="M600 0V120L660 180H1000L1060 240H1300"/>
+  <path class="pulse p" pathLength="100" style="animation-delay:-1s;animation-duration:8.5s" d="M0 700H150L210 640V400"/>
+</svg>
+<main>
+  <header class="hero">
+    <div class="tag"><span></span>SLIMÁK ONLINE</div>
+    <h1 class="glitch" data-text="MiSaK750">MiSaK750</h1>
+    <div class="scroll" aria-hidden="true"></div>
+  </header>
+
+  <section class="rv">
+    <h2>O mně</h2>
+    <div class="glass about">
+      <p>Jsem <b>slimák</b>, který neustále rozjíždí nové projekty, na kterých pracuje svým vlastním, slimáčím tempem. A když se mi nějakej podaří dokončit, je to <b>zázrak</b>.</p>
+    </div>
+  </section>
+
+  <section class="rv">
+    <h2>Záliby</h2>
+    <div class="chips">
+      <div class="glass chip"><i>🎮</i>Streamování na Twitchi</div>
+      <div class="glass chip"><i>▶️</i>Příležitostně YouTube</div>
+      <div class="glass chip"><i>🎬</i>Editování videí</div>
+      <div class="glass chip"><i>💻</i>Indie programování</div>
+      <div class="glass chip"><i>🎧</i>Hudba</div>
+    </div>
+  </section>
+
+  <section class="rv">
+    <div class="glass moto">
+      <small>Současné životní moto</small>
+      <q>Proč dokončit jeden projekt, když můžu začít tři další?</q>
+    </div>
+  </section>
+
+  <section class="rv">
+    <h2>Najdeš mě tady</h2>
+    <div class="links">
+      <a class="glass link yt" href="https://www.youtube.com/@MiSaK750" target="_blank" rel="noopener"><strong>YouTube</strong><span>Videa a občasné experimenty</span></a>
+      <a class="glass link tw" href="https://www.twitch.tv/misak7500" target="_blank" rel="noopener"><strong>Twitch</strong><span>Streamy a pokec</span></a>
+      <a class="glass link dc" href="https://www.discord.gg/nhCAxr5" target="_blank" rel="noopener"><strong>Discord server</strong><span>Komunita a novinky</span></a>
+    </div>
+  </section>
+
+  <section class="rv">
+    <h2>Projekty</h2>
+    <div class="glass proj">
+      <div>
+        <span class="badge">Soukromý</span>
+        <h3>Discord bot</h3>
+        <p>Můj vlastní bot, který běží jen u mě. Všechno k němu najdeš v dokumentaci.</p>
+      </div>
+      <a class="btn" href="https://misak750.github.io/Synny-docs/" target="_blank" rel="noopener">Otevřít dokumentaci</a>
+    </div>
+  </section>
+
+  <footer>© 2026 MiSaK750 – pomalu, ale jistě 🐌</footer>
+</main>
+<script>
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
